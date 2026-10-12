@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InventoryWise | Smart Stock Decisions</title>
+  <meta name="description" content="InventoryWise helps small retailers plan stock orders within their available budget." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">IW</div>
+        <div>
+          <strong>InventoryWise</strong>
+          <small>SMARTER STOCK, SIMPLER</small>
+        </div>
+      </div>
+
+      <div class="nav-label">WORKSPACE</div>
+      <a class="nav-item active" href="#dashboard"><span>▦</span> Overview</a>
+      <a class="nav-item" href="#inventory"><span>▤</span> Inventory planner</a>
+      <a class="nav-item" href="#how-it-works"><span>✳</span> How it works</a>
+
+      <div class="sidebar-note">
+        <div class="note-icon">✦</div>
+        <strong>Built for small shops</strong>
+        <p>Make every rupee count with clearer stock decisions.</p>
+      </div>
+
+      <div class="sidebar-footer">
+        <span class="status-dot"></span>
+        Demo workspace
+        <span class="demo-tag">DEMO</span>
+      </div>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">RETAIL INVENTORY · OVERVIEW</div>
+          <h1>Your stock, under control.</h1>
+          <p class="subheading">
+            See what may run out — and decide what to buy with the money you have.
+          </p>
+        </div>
+        <div class="avatar">店</div>
+      </header>
+
+      <section class="hero-banner">
+        <div class="hero-copy">
+          <div class="hero-pill">
+            <span class="spark">✦</span> YOUR NEW EDGE
+          </div>
+          <h2>Smarter orders.<br /><em>Within your budget.</em></h2>
+          <p>
+            InventoryWise prioritizes urgent products first, so your limited
+            purchasing budget goes where it matters most.
+          </p>
+          <a class="hero-link" href="#inventory">
+            Try the budget optimizer <span>↘</span>
+          </a>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-circle circle-one"></div>
+          <div class="art-circle circle-two"></div>
+
+          <div class="receipt">
+            <div class="receipt-top">
+              <span>ORDER PLAN</span>
+              <span class="receipt-check">✓</span>
+            </div>
+            <div class="receipt-line"><span>Rice</span><b>HIGH</b></div>
+            <div class="receipt-line"><span>Milk</span><b>HIGH</b></div>
+            <div class="receipt-line"><span>Tea</span><b>MED</b></div>
+            <div class="receipt-total">
+              <span>Budget used</span>
+              <strong>₹2,700</strong>
+            </div>
+          </div>
+
+          <div class="floating-chip">
+            <span>↗</span> Priority-based plan
+          </div>
+        </div>
+      </section>
+
+      <section class="metrics-grid" aria-label="Inventory summary">
+        <article class="metric-card">
+          <div class="metric-head">
+            <span>Products tracked</span>
+            <span class="metric-icon purple">▤</span>
+          </div>
+          <div class="metric-value" id="productCount">4</div>
+          <div class="metric-foot">In your demo inventory</div>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-head">
+            <span>Need attention</span>
+            <span class="metric-icon amber">!</span>
+          </div>
+          <div class="metric-value" id="urgentCount">2</div>
+          <div class="metric-foot">Stock may run out soon</div>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-head">
+            <span>Estimated 7-day demand</span>
+            <span class="metric-icon green">↗</span>
+          </div>
+          <div class="metric-value" id="demandTotal">142 <small>units</small></div>
+          <div class="metric-foot">Based on weekday + weekend sales</div>
+        </article>
+      </section>
+
+      <section class="panel" id="inventory">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">PLAN YOUR PURCHASE</div>
+            <h2>Budget-aware order planner</h2>
+            <p>Adjust stock and sales numbers, then optimize your purchase plan.</p>
+          </div>
+          <button class="button button-light" id="resetBtn" type="button">
+            ↺ Reset demo
+          </button>
+        </div>
+
+        <div class="budget-bar">
+          <div class="budget-input-wrap">
+            <label for="budgetInput">Available purchasing budget</label>
+            <div class="currency-input">
+              <span>₹</span>
+              <input
+                id="budgetInput"
+                type="number"
+                min="0"
+                step="100"
+                value="3000"
+              />
+            </div>
+          </div>
+
+          <div class="budget-explainer">
+            <span class="budget-spark">✦</span>
+            <div>
+              <strong>Optimization goal</strong>
+              <p>Protect urgent stock first without exceeding your budget.</p>
+            </div>
+          </div>
+
+          <button class="button button-primary" id="optimizeBtn" type="button">
+            Optimize my order <span>→</span>
+          </button>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>PRODUCT</th>
+                <th>STOCK ON HAND</th>
+                <th>WEEKDAY SALES / DAY</th>
+                <th>WEEKEND SALES / DAY</th>
+                <th>UNIT COST (₹)</th>
+                <th>7-DAY DEMAND</th>
+                <th>STOCK LASTS</th>
+                <th>FULL ORDER COST</th>
+              </tr>
+            </thead>
+            <tbody id="inventoryBody"></tbody>
+          </table>
+        </div>
+
+        <div class="table-hint">
+          <span class="hint-dot"></span>
+          Demo estimates use 5 weekdays + 2 weekend days and a 10% safety buffer.
+        </div>
+
+        <div class="results" id="results" aria-live="polite">
+          <div class="results-empty">
+            <div class="empty-icon">✦</div>
+            <strong>Your purchase plan will appear here</strong>
+            <p>
+              Set your budget and select “Optimize my order” to see which
+              products to prioritize.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="bottom-grid" id="how-it-works">
+        <article class="info-card">
+          <div class="info-icon purple">01</div>
+          <h3>Estimate demand</h3>
+          <p>
+            Use recent weekday and weekend sales to estimate the next seven
+            days of demand.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <div class="info-icon green">02</div>
+          <h3>Spot stock risk</h3>
+          <p>
+            Estimate how long current stock lasts and flag products likely
+            to run out soon.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <div class="info-icon amber">03</div>
+          <h3>Prioritize by budget</h3>
+          <p>
+            Rank urgent products and build a suggested purchase plan that
+            stays within the budget.
+          </p>
+        </article>
+      </section>
+
+      <footer>
+        InventoryWise · College startup prototype
+        <span>Illustrative demo — not financial or sales advice.</span>
+      </footer>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
